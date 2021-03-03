@@ -110,3 +110,4 @@ for file in files:
 infodf = pd.DataFrame(infolist,columns=['Name','Type','Class','Genus','Species','Subclass','Particle size'])
 spectradf = pd.DataFrame(spectralist, columns = np.arange(400,900))
 finaldf = pd.concat([infodf,spectradf],axis=1)
+finaldf.to_csv('/Users/jkravz311/Desktop/jpl_aster_data.csv',index=False)
