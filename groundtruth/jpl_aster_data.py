@@ -85,13 +85,6 @@ for file in files:
                 wl.append(line.split('\t')[0][1:].strip()) # some \t dont have space after
                 ref.append(line.split('\t')[1].rstrip())                
                 
-                # try:
-                #     wl.append(line.split('\t ')[0][1:]) # wavelength
-                #     ref.append(line.split('\t ')[1].rstrip()) # reflectgance
-                # except:
-                #     wl.append(line.split('\t')[0][1:]) # some \t dont have space after
-                #     ref.append(line.split('\t')[1].rstrip())
-                
             # create array of meta and append to list
             sampleData = np.array([name, typ, clas, genus, species, subclass, size])
             infolist.append(sampleData)
@@ -103,10 +96,6 @@ for file in files:
             newref = np.interp(newlambda, wl, ref)
             spectralist.append(newref)
             
-            
-            
-# plt.plot(wl,ref,'r')
-# plt.plot(newlambda,newref,'b')
 infodf = pd.DataFrame(infolist,columns=['Name','Type','Class','Genus','Species','Subclass','Particle size'])
 spectradf = pd.DataFrame(spectralist, columns = np.arange(400,900))
 finaldf = pd.concat([infodf,spectradf],axis=1)
