@@ -1,3 +1,11 @@
+'''
+work in progress...
+Clustering spectra using beta spline coefficients
+Elbow method for defining optimal # k for Kmeans clustering
+
+Kravitz, 2021
+'''
+
 #%%
 import pandas as pd
 import numpy as np
@@ -104,6 +112,4 @@ for key, group in clusters:
     cluster.T.plot(legend=False)
     print (key)
 
-#%%
-clustDict[0].T.plot()
 
