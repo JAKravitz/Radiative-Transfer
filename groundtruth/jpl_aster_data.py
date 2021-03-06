@@ -14,10 +14,10 @@ import glob
 # path to data
 path = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/ecospeclib-all_aster_jpl/'
 #path = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/test/'
-#file = 'vegetation.tree.melaleuca.linariifolia.vswir.jpl198.jpl.asd.spectrum.txt'
 def listdir_nohidden(path):
     return glob.glob(os.path.join(path, '*'))
 files = listdir_nohidden(path)
+#file = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/ecospeclib-all_aster_jpl/soil.mollisol.agriudoll.none.all.87p757.jhu.becknic.spectrum.txt'
 
 # empty lists to append
 infolist = []
@@ -83,7 +83,12 @@ for file in files:
                     break
                 
                 wl.append(line.split('\t')[0][1:].strip()) # some \t dont have space after
-                ref.append(line.split('\t')[1].rstrip())                
+                ref.append(line.split('\t')[1].rstrip()) 
+            
+            # reverse order of spectra if they're backwards
+            if wl[0] > wl[-1]:
+                wl.reverse()
+                ref.reverse()
                 
             # create array of meta and append to list
             sampleData = np.array([name, typ, clas, genus, species, subclass, size])

@@ -1,5 +1,4 @@
 '''
-work in progress...
 Clustering spectra using beta spline coefficients
 Elbow method for defining optimal # k for Kmeans clustering
 
@@ -20,7 +19,7 @@ from scipy.spatial.distance import cdist
 
 ### INPUTS ###
 # path to compiled aster data
-datapath = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/jpl_aster_data.csv'
+#datapath = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/jpl_aster_data.csv'
 
 ##############
 
@@ -51,10 +50,10 @@ def beta_spline (data,t2):
     coefs = coefs.T
     return coefs
 
-def main (datapath):
+def spline_coefs (data):
     
     # load data and separate spectra
-    data = pd.read_csv(datapath)
+    #data = pd.read_csv(datapath)
     spectra = data.filter(regex='\d')
     meta = data.filter(regex='\D')
 
@@ -64,11 +63,11 @@ def main (datapath):
     t2 = [430,460,500,515,530,545,560,575,590,605,620,635,650,665,680,695,710,725,740,755,800,850]
 
     # plot basis functions for verification
-    bss = basis.BSpline([400,900],knots=knots)
-    fig, ax = plt.subplots()
-    bss.plot(chart=ax)
-    ax.set_xlabel('Wavelength (nm)')
-    #fig.savefig('/Users/jkravz311/Desktop/bspline_funs.png',bbox_inches='tight',dpi=300)
+    # bss = basis.BSpline([400,900],knots=knots)
+    # fig, ax = plt.subplots()
+    # bss.plot(chart=ax)
+    # ax.set_xlabel('Wavelength (nm)')
+    # fig.savefig('/Users/jkravz311/Desktop/bspline_funs.png',bbox_inches='tight',dpi=300)
 
     # standardize original spectra
     st_data = standardize_spectra(spectra)
@@ -76,40 +75,40 @@ def main (datapath):
     # convert spectra to basis functions
     coefs = beta_spline(st_data,t2)
     
-    return coefs
+    return coefs, spectra, meta
 
-coefs = main(datapath)
+
+def elbow (data):
+    # elbow method to define # clusters
+    # requires visual inspection of plot
+    data = data.values(data)
+    K = range(1,20)
+    dist = []
+    for k in K:
+        km = KMeans(n_clusters=k)
+        km = km.fit(data)
+        dist.append(km.inertia_)
+    fig, ax = plt.subplots()
+    ax.plot(K,dist,'ko-')
+
+
+def kmeans_clust (data,k):
+    # k means clustering
+    kmeans = KMeans(n_clusters=k)
+    kmeans = kmeans.fit(data)
+    labels = kmeans.predict(data)
+    #centroids = kmeans.cluster_centers_
+    return labels
+
 
 #%%
-# elbow method to define # clusters
-data = coefs.values
-
-K = range(1,10)
-dist = []
-for k in K:
-    km = KMeans(n_clusters=k)
-    km = km.fit(data)
-    dist.append(km.inertia_)
-
-fig, ax = plt.subplots()
-ax.plot(K,dist,'ko-')
-
-#%%
-# k means clustering
-k = 20
-kmeans = KMeans(n_clusters=k)
-kmeans = kmeans.fit(coefs)
-labels = kmeans.predict(coefs)
-centroids = kmeans.cluster_centers_
-
-#%%
-spectra['labels'] = labels
-clusters = spectra.groupby('labels')
-clustDict = {}
-for key, group in clusters:
-    cluster = group.iloc[:,:-1]
-    clustDict[key] = cluster
-    cluster.T.plot(legend=False)
-    print (key)
+# spectra['labels'] = labels
+# clusters = spectra.groupby('labels')
+# clustDict = {}
+# for key, group in clusters:
+#     cluster = group.iloc[:,:-1]
+#     clustDict[key] = cluster
+#     cluster.T.plot(legend=False)
+#     print (key)
 
 
