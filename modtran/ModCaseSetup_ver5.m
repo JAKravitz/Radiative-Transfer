@@ -1,5 +1,5 @@
 % $Id$ $Id:$ Generated on 22-Oct-2014 19:27:29
-GreenGrass = Mod5.ReadAlb('Reflectance/jhu.becknic.vegetation.grass.green.solid.gras.spectrum.dat'); % Read green grass reflectance
+GreenGrass = Mod5.ReadAlb('data/land_reflectance/jhu.becknic.vegetation.grass.green.solid.gras.spectrum.dat'); % Read green grass reflectance
 aot550 = csvread('aeronet_aot550.csv',1,1);
 ext = csvread('aeronet_ext.csv',1,1);
 ssa = csvread('aeronet_ssa.csv',1,1);

@@ -27,14 +27,14 @@ Sen2_noise_b = [3.13E-05 7.14E-04 5.67E-04 4.85E-04 2.03E-04 2.61E-04 2.41E-04 3
 Sen2_noise_A_k = [4.073746055 3.815624168 4.208959204 4.536360095 5.229215648 4.895777694 4.561048049 6.229756908 5.162238081 8.580513483];
 Sen2_GSD = [60 10 10 10 20 20 20 10 20 60];  % GSD in metres
 Sen2_SNR_ref = [983.3 211.8 246.1 222.7 248.4 214.6 217.6 228.2 155.6 172.7]; % SNR average at L-ref measured
-Sen2 = Mod5.ReadFlt('Sensors/Sentinel2VNIR20110909.flt'); % Version from 2011-09-09
+Sen2 = Mod5.ReadFlt('data/sensors/Sentinel2VNIR20110909.flt'); % Version from 2011-09-09
 [CanBands, iS2] = AddBands(CanBands, Sen2, Sen2_L_ref, Sen2_SNR_ref, Sen2_noise_a, Sen2_noise_b, Sen2_noise_A_k, Sen2_GSD);
 CanBands.Sat = [CanBands.Sat, repmat({'Sen2'},1,numel(iS2))];
 
 % Add Landsat 8
 L8_L_ref   = [40   40  30 22 14 23]; % W/m^2/sr/micron
 L8_SNR_ref = [130 130 100 90 90 80];
-L8 = Mod5.ReadFlt('Sensors/Landsat8Ball_BA_RSR_VNIR.v1.2.flt'); % Version 1.2
+L8 = Mod5.ReadFlt('data/sensors/Landsat8Ball_BA_RSR_VNIR.v1.2.flt'); % Version 1.2
 [CanBands, iL8] = AddBands(CanBands, L8, L8_L_ref, L8_SNR_ref);
 CanBands.Sat = [CanBands.Sat, repmat({'L8'},1,numel(iL8))];
 
@@ -42,7 +42,7 @@ CanBands.Sat = [CanBands.Sat, repmat({'L8'},1,numel(iL8))];
 % Add MODIS
 MOD_L_ref   = [44.9 41.4 35.3 32.1 27.9 29.0 21.0 21.8 9.5 8.7  10.2 24.7 6.2]; % W/m^2/sr/micron (mW/m^2/sr/nm)
 MOD_SNR_ref = [ 880  830  243  802  754  228  750  128 910 1087  586  201 516];
-MOD = Mod5.ReadFlt('Sensors/MODIS_RSRs_VNIR_avgNoOOB.flt');
+MOD = Mod5.ReadFlt('data/sensors/MODIS_RSRs_VNIR_avgNoOOB.flt');
 [CanBands, iMOD] = AddBands(CanBands, MOD, MOD_L_ref, MOD_SNR_ref);
 CanBands.Sat = [CanBands.Sat, repmat({'MODIS'},1,numel(iMOD))];
 
@@ -50,7 +50,7 @@ CanBands.Sat = [CanBands.Sat, repmat({'MODIS'},1,numel(iMOD))];
 % Add MERIS
 MER_L_ref   = [47.9 41.9 31.2 23.7 18.5 12.0 9.2 8.3 6.9 5.6 3.4 4.9 3.2 3.1 2.4]; % W/m^2/sr/micron (mW/m^2/sr/nm)
 MER_SNR_ref = [1871 1650 1418 1222 1156  863 708 589 631 486 205 628 457 271 211];
-MER = Mod5.ReadFlt('Sensors/MERIS_RSRs_avg.flt');
+MER = Mod5.ReadFlt('data/sensors/MERIS_RSRs_avg.flt');
 [CanBands, iMER] = AddBands(CanBands, MER, MER_L_ref, MER_SNR_ref);
 CanBands.Sat = [CanBands.Sat, repmat({'MERIS'},1,numel(iMER))];
 
@@ -87,9 +87,9 @@ end
 %% Hyperspectral sensors
 % Set up the hyperspectral sensors HICO and EnMAP
 % First do HICO
-load(['Sensors' filesep 'HICOCentreWidth.mat']) % Load centre wavelengths and widths for HICO
+load(['data/sensors' filesep 'HICOCentreWidth.mat']) % Load centre wavelengths and widths for HICO
 % Set up the band names and shapes for HICO
-HICOFlt = Mod5.ReadFlt(['Sensors' filesep 'HICO_Synthetic.flt']);
+HICOFlt = Mod5.ReadFlt(['data/sensors' filesep 'HICO_Synthetic.flt']);
 HICO.TabName = {};
 for iBand = 1:numel(HICO.Centre)
     HICO.Names{iBand} = sprintf('c%03d.%01dw%03d.%01dp', floor(HICO.Centre(iBand)), floor(10*(HICO.Centre(iBand)-floor(HICO.Centre(iBand)))), ...
@@ -106,9 +106,9 @@ HICOSheet = [{'BandCode'; 'BandCentre'; 'BandWidth'}, HICOSheet]; % Row headers
 %xlswrite('HICOBands.xls', HICOSheet);
 
 % Now do EnMAP
-load(['Sensors' filesep 'EnMAPCentreWidth.mat']) % Load centre wavlengths and widths for EnMAP
+load(['data/sensors' filesep 'EnMAPCentreWidth.mat']) % Load centre wavlengths and widths for EnMAP
 % Set up the band names and shapes for EnMAP
-EnMAPFlt = Mod5.ReadFlt(['Sensors' filesep 'EnMAP_Synthetic.flt']);
+EnMAPFlt = Mod5.ReadFlt(['data/sensors' filesep 'EnMAP_Synthetic.flt']);
 for iBand = 1:numel(EnMAP.Centre)
     EnMAP.Names{iBand} = sprintf('c%03d.%01dw%03d.%01dp', floor(EnMAP.Centre(iBand)), floor(10*(EnMAP.Centre(iBand)-floor(EnMAP.Centre(iBand)))), ...
                                                             floor(EnMAP.Width(iBand)), round(10*(EnMAP.Width(iBand)-floor(EnMAP.Width(iBand)))));
