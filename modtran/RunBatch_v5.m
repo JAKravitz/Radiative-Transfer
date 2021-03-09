@@ -5,7 +5,7 @@ close all
 % Set parallel friendly mode
 Mod5.ParallelFriendly(true);
 % Set up batch name
-BatchName = 'v5_';
+BatchName = 'v6_';
 
 % Switch off some annoying and repetitive warnings
 warning('off','Mod5:ReadAlbFromUSGS:DeletedData');
@@ -51,12 +51,12 @@ SmoothMethod = 'moving'; % Method of smoothing for plots and hyperspectral data
 OpenCsvFiles;
 
 % Set up sensor band groups for plotting and plot types
-PlotFormats = {'-dpng', '-dpdf'}; % Plot format or formats to use
+%PlotFormats = {'-dpng', '-dpdf'}; % Plot format or formats to use
 % PlotGroups = [5 6 8 9 10]; % S2, S3, L8, MODIS and MERIS
-PlotGroups = [5];
-iCaseCombo = 181716;
+%PlotGroups = [5];
+iCaseCombo = 0;
 %% Run the cases
-for iHyCase = 45430:numel(HyCase)
+for iHyCase = 1:numel(HyCase)
     
     ModCaseSetup_ver5; % put here so that new random variabls for each hyCase
     

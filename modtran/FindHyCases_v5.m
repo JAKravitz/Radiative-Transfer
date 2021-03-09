@@ -3,7 +3,7 @@
 fid = fopen('HyCaseSetup_v5.m', 'wt');
 fprintf(fid, ['%% $I' 'd$ Generated on %s\n'], datestr(now));
 fprintf(fid, '%% +++ Start of Hydrolight Cases +++\n');    
-HydroMCases = dir('/Users/jkravz311/Desktop/PhD/cyano_sims/NN/txt_final/M*.txt');
+HydroMCases = dir('/Users/jkravz311/git_projects/Radiative-Transfer/modtran/test/M*.txt');
 % SZA = 30; % deg
 WSS = 5; % m/s wind speed
 WHH = 5; % m/s, average over last 24 hr
