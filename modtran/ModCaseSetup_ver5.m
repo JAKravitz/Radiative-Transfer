@@ -1,10 +1,10 @@
 % $Id$ $Id:$ Generated on 22-Oct-2014 19:27:29
 GreenGrass = Mod5.ReadAlb('data/land_reflectance/jhu.becknic.vegetation.grass.green.solid.gras.spectrum.dat'); % Read green grass reflectance
-aot550 = csvread('aeronet_aot550.csv',1,1);
-ext = csvread('aeronet_ext.csv',1,1);
-ssa = csvread('aeronet_ssa.csv',1,1);
+aot550 = csvread('data/aeronet_aot550.csv',1,1);
+ext = csvread('data/aeronet_ext.csv',1,1);
+ssa = csvread('data/aeronet_ssa.csv',1,1);
 ht = linspace(0,4,100);
-water = csvread('aeronet_waterVapor.csv',1,1);
+water = csvread('data/aeronet_waterVapor.csv',1,1);
 adjacency = linspace(0.005,.5,100);
 
 % +++ Start of MODTRAN Case 1 

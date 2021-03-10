@@ -12,7 +12,7 @@ theResults.HyCase = theHyCase;
 theResults.ModCase = theModCase;
 theResults.ModCaseName = theModCase.Name;
 theResults.PlotFiles = {};
-theResults.PlotFormats = PlotFormats;
+%theResults.PlotFormats = PlotFormats;
 Revision = '$Revision:$';
 theResults.Rev = Revision;
 
