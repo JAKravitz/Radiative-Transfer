@@ -58,7 +58,7 @@ iCaseCombo = 0;
 %% Run the cases
 for iHyCase = 1:numel(HyCase)
     
-    ModCaseSetup_ver5; % put here so that new random variabls for each hyCase
+    ModCaseSetup_test; % put here so that new random variabls for each hyCase
     
     for iModCase = 1:numel(ModCase)
         iCaseCombo = iCaseCombo + 1;

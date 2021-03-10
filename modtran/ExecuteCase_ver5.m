@@ -143,7 +143,10 @@ EO1.ARUSS = '   ';    % Don't use extended user-defined aerosol facility
 EO1.IVULCN = 0;       % Background stratospheric aerosol profile
 EO1.ICSTL = 1;        % Continental influence of maritime aerosols - not applicable to this case
 if ~isempty(theModCase.ICLD) % Set up cloud model if requested
-  EO1.ICLD = theModCase.ICLD;  
+  EO1.ICLD = theModCase.ICLD; 
+  EO1.CTHIK = theModCase.CTHIK; % cirrus thickness (km)
+  EO1.CALT = theModCase.CALT; % cirrus base altitude (km)
+  EO1.CEXT = theModCase.CEXT; % cirrus ext. coefficient (km-1)
 else
   EO1.ICLD = 0;       % Default is no cloud
 end

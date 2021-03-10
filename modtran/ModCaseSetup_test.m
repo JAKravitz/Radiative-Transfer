@@ -1,0 +1,233 @@
+% $Id$ $Id:$ Generated on 22-Oct-2014 19:27:29
+% GreenGrass = Mod5.ReadAlb('data/land_reflectance/jhu.becknic.vegetation.grass.green.solid.gras.spectrum.dat'); % Read green grass reflectance
+% aot550 = csvread('data/aeronet_aot550.csv',1,1);
+% ext = csvread('data/aeronet_ext.csv',1,1);
+% ssa = csvread('data/aeronet_ssa.csv',1,1);
+% ht = linspace(0,4,100);
+% water = csvread('data/aeronet_waterVapor.csv',1,1);
+% adjacency = linspace(0.005,.5,100);
+
+% CLOUDS
+thik = linspace(0.1,2.5,100);
+agl = linspace(6,16,100);
+cext = linspace(0.05,0.40,100);
+
+% +++ Start of MODTRAN Case 1 
+h2ostr = 1.5452;
+aot = -0.3;
+astmx = .4;
+assalb = [0.9487,0.9482,0.9415,0.9352];
+altitude = .1;
+adjFactor = 0;
+%
+ModCase(1).iModCase = 1;
+ModCase(1).Name = 'Case1';
+ModCase(1).Descr = 'Test: No cloud';
+ModCase(1).LSUNFL = 'T';
+ModCase(1).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(1).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(1).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(1).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(1).IHAZE = 6; % Aerosol character.
+ModCase(1).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(1).CDASTM = 'b';
+ModCase(1).ASTMX = astmx;
+ModCase(1).NSSALB = 4;
+ModCase(1).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(1).ASSALB = assalb;
+ModCase(1).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(1).ICLD = 0; % MODTRAN Cloud model.
+ModCase(1).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(1).AdjRefl = []; % Zonal reflectance data.
+ModCase(1).Tweaks = {}; % Any other case tweaks.
+ModCase(1).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 1 
+% +++ Start of MODTRAN Case 2
+ModCase(2).iModCase = 2;
+ModCase(2).Name = 'Case2';
+ModCase(2).Descr = 'test: cumulus cloud';
+ModCase(2).LSUNFL = 'T';
+ModCase(2).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(2).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(2).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(2).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(2).IHAZE = 6; % Aerosol character.
+ModCase(2).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(2).CDASTM = 'b';
+ModCase(2).ASTMX = astmx;
+ModCase(2).NSSALB = 4;
+ModCase(2).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(2).ASSALB = assalb;
+ModCase(2).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(2).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(2).AdjRefl = []; % Zonal reflectance data.
+ModCase(2).Tweaks = {}; % Any other case tweaks.
+ModCase(2).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 2 
+% +++ Start of MODTRAN Case 3 
+% h2ostr2 = datasample(water,1);
+% aot2 = -datasample(aot550,1);
+% astmx2 = datasample(ext,1);
+% assalb2 = datasample(ssa,1);
+% altitude2 = datasample(ht,1);
+% adjFactor2 = datasample(adjacency,1);
+%
+ModCase(3).iModCase = 3;
+ModCase(3).Name = 'Case3';
+ModCase(3).Descr = 'test: altostratus cloud';
+ModCase(3).LSUNFL = 'T';
+ModCase(3).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(3).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(3).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(3).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(3).IHAZE = 6; % Aerosol character.
+ModCase(3).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(3).CDASTM = 'b';
+ModCase(3).ASTMX = astmx;
+ModCase(3).NSSALB = 4;
+ModCase(3).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(3).ASSALB = assalb;
+ModCase(3).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(3).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(3).AdjRefl = []; % Zonal reflectance data.
+ModCase(3).Tweaks = {}; % Any other case tweaks.
+ModCase(3).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 3 
+% +++ Start of MODTRAN Case 4
+ModCase(4).iModCase = 4;
+ModCase(4).Name = 'Case4';
+ModCase(4).Descr = 'test: stratus cloud';
+ModCase(4).LSUNFL = 'T';
+ModCase(4).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(4).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(4).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(4).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(4).IHAZE = 6; % Aerosol character.
+ModCase(4).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(4).CDASTM = 'b';
+ModCase(4).ASTMX = astmx;
+ModCase(4).NSSALB = 4;
+ModCase(4).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(4).ASSALB = assalb;
+ModCase(4).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(4).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(4).AdjRefl = []; % Zonal reflectance data.
+ModCase(4).Tweaks = {}; % Any other case tweaks.
+ModCase(4).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 4 
+% +++ Start of MODTRAN Case 5
+ModCase(5).iModCase = 5;
+ModCase(5).Name = 'Case5';
+ModCase(5).Descr = 'test: stratus/stratocumulus cloud';
+ModCase(5).LSUNFL = 'T';
+ModCase(5).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(5).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(5).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(5).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(5).IHAZE = 6; % Aerosol character.
+ModCase(5).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(5).CDASTM = 'b';
+ModCase(5).ASTMX = astmx;
+ModCase(5).NSSALB = 4;
+ModCase(5).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(5).ASSALB = assalb;
+ModCase(5).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(5).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(5).AdjRefl = []; % Zonal reflectance data.
+ModCase(5).Tweaks = {}; % Any other case tweaks.
+ModCase(5).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 5
+% +++ Start of MODTRAN Case 6
+ModCase(6).iModCase = 6;
+ModCase(6).Name = 'Case6';
+ModCase(6).Descr = 'test: nimbostratus cloud';
+ModCase(6).LSUNFL = 'T';
+ModCase(6).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(6).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(6).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(6).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(6).IHAZE = 6; % Aerosol character.
+ModCase(6).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(6).CDASTM = 'b';
+ModCase(6).ASTMX = astmx;
+ModCase(6).NSSALB = 4;
+ModCase(6).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(6).ASSALB = assalb;
+ModCase(6).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(6).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(6).AdjRefl = []; % Zonal reflectance data.
+ModCase(6).Tweaks = {}; % Any other case tweaks.
+ModCase(6).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 6 
+% +++ Start of MODTRAN Case 7
+ModCase(7).iModCase = 7;
+ModCase(7).Name = 'Case7';
+ModCase(7).Descr = 'test: standard cirrus cloud';
+ModCase(7).LSUNFL = 'T';
+ModCase(7).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(7).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(7).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(7).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(7).IHAZE = 6; % Aerosol character.
+ModCase(7).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(7).CDASTM = 'b';
+ModCase(7).ASTMX = astmx;
+ModCase(7).NSSALB = 4;
+ModCase(7).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(7).ASSALB = assalb;
+ModCase(7).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(7).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(7).AdjRefl = []; % Zonal reflectance data.
+ModCase(7).Tweaks = {}; % Any other case tweaks.
+ModCase(7).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 7 
+% +++ Start of MODTRAN Case 7
+ModCase(8).iModCase = 8;
+ModCase(8).Name = 'Case8';
+ModCase(8).Descr = 'test: sub visual cirrus cloud';
+ModCase(8).LSUNFL = 'T';
+ModCase(8).USRSUN = 'SUNnmCEOSThuillier2005.dat';
+ModCase(8).SolarSpectrum = 'CEOS Thuillier 20015';
+ModCase(8).H2OSTR = sprintf('g %5.2f', h2ostr); % Water vapour column in g/cm^2
+ModCase(8).O3STR = 'a0.290'; % Ozone column in atm-cm
+ModCase(8).IHAZE = 6; % Aerosol character.
+ModCase(8).VIS = aot; % Visibility in km. (-AOT550)
+ModCase(8).CDASTM = 'b';
+ModCase(8).ASTMX = astmx;
+ModCase(8).NSSALB = 4;
+ModCase(8).AWAVLN = [0.4 0.675 0.875 1.0];
+ModCase(8).ASSALB = assalb;
+ModCase(8).GNDALT = altitude; % Ground height above sea level in km.
+ModCase(2).ICLD = 18; % MODTRAN Cloud model.
+ModCase(2).CTHIK = datasample(thik,1); % cirrus thickness (km)
+ModCase(2).CALT = datasample(agl,1); % cirrus base altitude (km)
+ModCase(2).CEXT = datasample(cext,1); % cirrus ext. coefficient (km-1)
+ModCase(8).AdjFactor = 0; % Adjacency factor runs from 0 for no adjacency to 1 for small target surrounded by adjacent zone
+ModCase(8).AdjRefl = []; % Zonal reflectance data.
+ModCase(8).Tweaks = {}; % Any other case tweaks.
+ModCase(8).DateTime = [2009 09 15 8 30 0]; % Date time for solar distance.
+% --- End of MODTRAN Case 8 
