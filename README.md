@@ -7,3 +7,5 @@ A repository and working directory for processing code, data, and documents for 
 * ModCaseSetup.m should be previously setup for required atmospheric parameters
 * ExecuteCase.m should also be pointing to hydrolight output directory, and performs the modtran heavy lifting. MATLAB wrapper for modtran requried.
 * Other scripts used for resolving spectra to sensor SRFs and including sensitivity information  
+
+## HYDROLIGHT
