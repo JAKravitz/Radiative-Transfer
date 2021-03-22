@@ -11,7 +11,7 @@ import re
 import pandas as pd
 import numpy as np
 
-fname = '/Users/jkravz311/git_projects/Radiative-Transfer/hydrolight/test/Msunglint1.txt'
+fname = '/Users/jkravz311/.wine/drive_c/HE52/output/Ecolight/excel/Msg_15_15_50.txt'
 
 # flist = os.listdir(path)
 
