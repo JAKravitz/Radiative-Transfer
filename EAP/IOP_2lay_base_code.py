@@ -1,4 +1,10 @@
-#reset
+#%%
+# fortran wrapper
+from numpy import f2py
+sourcefile = open('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/Dmmex_R14B_4.f','rb')
+sourcecode = sourcefile.read()
+f2py.compile(sourcecode, modulename='Dmmex_R14B_4')
+
 import Dmmex_R14B_4
 import scipy.io as io
 import numpy as np

@@ -6,19 +6,19 @@
 
 clear
 
-savedir='/Users/user/Documents/WORK/HYDRO/'
+savedir='/Users/jkravz311/Desktop/eap_test/';
 int_val=56; % 56 for 400:5:900; 276 for 400:1:900
-filename = 'test_for_py_comparison_effvar2' % name for resulting IOP mat:
+filename = 'eap_test1'; % name for resulting IOP mat:
 lambda=[0.400:0.005:0.900]';
 D_eff= [2,8,16]';
 V_eff=2; % Effective variance
 Vs=0.2;	% Shell as chloroplast volume   
-ci=2.5e6
+ci=2.5e6;
 
 %*********************************************************************************
 %		Load and set up refractive index  and cell geometry related data
 %*********************************************************************************
-cd /Users/user/Documents/WORK/2LAYER/2lay/
+%cd /Users/user/Documents/WORK/2LAYER/2lay/
 %Get name of input file for lambda,n, k and PSD
 load 501nm_extended_e1701000
 
@@ -75,11 +75,12 @@ theta=cat(1,deg2rad(theta901),flipud(pi-deg2rad(theta901(1:900))));
 dtheta=diff(theta); dtheta(1801)=theta(1801)-theta(1800);
 back1=find(theta==(pi/2));
 back2=find(theta==(pi)); 
-   
+
+%%
 %*********************************************************************************
 %	Run Dmilay for all sizes and wavelengths
 %*********************************************************************************
-cd /Users/user/Documents/WORK/2LAYER/2lay/  
+%cd /Users/user/Documents/WORK/2LAYER/2lay/  
 %Start loop to cycle through wavelengths
 [ni nj]=size(kcore); 
 
