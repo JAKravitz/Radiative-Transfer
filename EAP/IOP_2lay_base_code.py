@@ -8,16 +8,27 @@ f2py.compile(sourcecode, modulename='Dmmex_R14B_4')
 import Dmmex_R14B_4
 import scipy.io as io
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
+#%%
 l = np.arange(.4, .905, .005) # wavelength range and resolution (changing this changes your interp value when normalising kshell)
 int_val = 55 # refers to l[55] which is 675 nm. 255 for 1 nm resolution
 
 Vs = 0.2
 ci = 2.5e6
-D_eff = np.arange(2, 8, 2)
+D_eff = np.array([15])
 
 V_eff= 0.6
-mf = io.loadmat('/Users/user/Documents/WORK/2LAYER/2lay/501nm_extended_e1701000.mat')
+mf = io.loadmat('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat')
+
+# using absorption for imaginary refractive index
+im = pd.read_csv('/Users/jkravz311/Desktop/phyto_imag_refr_idx.csv')
+im = im.filter(regex='^[0-9]')
+im_wv = np.arange(.4,.801,.001)
+im_a1 = im.iloc[0,:].values
+
+
 Vc=1 - Vs
 FR=(1- Vs) ** (1/ 3)# relative volume of core to shell
 nmedia = 1.334
@@ -40,11 +51,20 @@ def analytic_signal(x):
 
 from scipy.interpolate import griddata
 kcore = griddata(mf['RIs'][:, 5], mf['RIs'][:, 0], l, 'linear')
-kshell_base = griddata(mf['RIs'][:, 5], mf['RIs'][:, 2], l, 'linear')
+#kshell_base = griddata(mf['RIs'][:, 5], mf['RIs'][:, 2], l, 'linear')
+
+# measured abs
+kshell_base = griddata(im_wv, im_a1, l, 'linear',)
+# replace negative/zeros with nans
+kshell_base = np.where(kshell_base < 0, np.nan, kshell_base)
+kshell_base = np.where(kshell_base == 0, np.nan, kshell_base)
+# replace nans with minimum value
+kshell_base[np.isnan(kshell_base)] = min(kshell_base)
+
 kshell_norm = (6.75e-7/ nmedia) * (0.027 * ci/ Vs) / (4 * np.pi) #scale to this theoretical max unpackaged chl abs at 675 nm
 kshell = kshell_base * (kshell_norm / kshell_base[int_val]) #55 is index of 675 nm
 
-nshell = 1.10 + np.imag(analytic_signal(kshell))
+nshell = 1.14 + np.imag(analytic_signal(kshell))
 ncore = 1.02 + np.imag(analytic_signal(kcore))
 khom = kcore*Vc + kshell*Vs # real refractive index 
 nhom = ncore*Vc + nshell*Vs
@@ -74,6 +94,7 @@ PF_check = np.zeros((len(D_eff),len(l)))
 d_alpha = []  
 PF = np.zeros((len(D_eff), len(wavelength), 1801))
 
+#%%
 # declare all lists and arrays to fill in the jjj loop (refilled each iteration)
 Qc, Sigma_c, c, Qb, Sigma_b, b, Qa, Sigma_a, a, Qbb, Sigma_bb, bb, bbtilde = (np.zeros([len(D_eff),len(l)]) for i in range(13))
 a_sol, a_solm, Qastar2_dir, Qas21 = (np.zeros([len(D_eff),len(l)]) for i in range(4))
@@ -191,3 +212,20 @@ for nii in np.arange(0,len(l)): # this is the wavelength loop
         Qastar2_dir[jjj,nii] = a[jjj, nii] / a_sol[jjj, nii] #Hayley for input into fluorescence algorithm
       
  	    # both the jjj loop and the nii loop end here.
+         
+#%% plot results
+
+a = pd.DataFrame(a,columns=l)
+a.to_csv('/Users/jkravz311/Desktop/phyto_test/a_V0.4_C6_n1.14.csv')
+b = pd.DataFrame(b,columns=l)
+b.to_csv('/Users/jkravz311/Desktop/phyto_test/b_V0.4_C6_n1.14.csv')
+bb = pd.DataFrame(bb,columns=l)
+bb.to_csv('/Users/jkravz311/Desktop/phyto_test/bb_V0.4_C6_n1.14.csv')
+
+a.T.plot()
+b.T.plot()
+bb.T.plot()
+
+
+
+
