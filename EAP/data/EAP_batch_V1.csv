@@ -1,0 +1,60 @@
+﻿Species,Class,Dmin,Dmax,Vs,Ci,nshell
+D. tertiolecta1,Chlorophyceae,6,14,Vs2,Ci3,nshell3
+G. theta,Cryptophyceae,4,12,Vs2,Ci2,nshell2
+T. oceanica,Coscinodiscophyceae,4,12,Vs2,Ci2,nshell2
+G. simplex,Dinophyceae,4,12,Vs2,Ci2,nshell2
+H. akashiwo,Raphidophyceae,20,30,Vs3,Ci1,nshell1
+N. atomus,Chlorophyceae,2,5,Vs1,Ci2,nshell2
+Pavlova sp. ,Prymnesiophyceae,2,5,Vs1,Ci2,nshell2
+C. polylepis,Prymnesiophyceae,4,12,Vs1,Ci3,nshell3
+S. elongatus,Cyanophyceae,2,4,Vs1,Ci1,nshell1
+F. pinnata,Fragilariophyceae,3,9,Vs2,Ci2,nshell2
+P. calceolata,Pelagophyceae,1,3,Vs1,Ci1,nshell1
+H. virescens,Cryptophyceae,2,5,Vs2,Ci3,nshell3
+A. tamarense,Dinophyceae,27,35,Vs3,Ci1,nshell1
+A. carterae,Dinophyceae,6,14,Vs2,Ci3,nshell3
+P. capsulatus,Prasinophyceae,2,4,Vs1,Ci1,nshell1
+T. weissflogii,Coscinodiscophyceae,16,24,Vs3,Ci3,nshell3
+R. lens,Cryptophyceae,4,10,Vs2,Ci3,nshell3
+P. subviridis,Pelagophyceae,2,4,Vs1,Ci2,nshell2
+H. triquetra,Dinophyceae,14,22,Vs2,Ci3,nshell3
+P. provasolii,Prasinophyceae,1,3,Vs1,Ci1,nshell1
+M. polymorphus,Coscinodiscophyceae,3,5,Vs1,Ci2,nshell3
+Nannochloropsis sp. ,Eustigmatophyceae,2,6,Vs2,Ci3,nshell3
+I. galbana,Prymnesiophyceae,3,8,Vs2,Ci3,nshell3
+M. pusilla,Prasinophyceae,1,3,Vs1,Ci1,nshell1
+T. pseudonanna,Coscinodiscophyceae,2,6,Vs2,Ci2,nshell3
+T. rotula,Coscinodiscophyceae,16,24,Vs3,Ci1,nshell1
+C. calcitrans,Coscinodiscophyceae,4,8,Vs2,Ci2,nshell3
+K. rotundum,Dinophyceae,6,13,Vs2,Ci3,nshell3
+D. tertiolecta2,Chlorophyceae,6,14,Vs2,Ci3,nshell3
+E. huxleyi,Prymnesiophyceae,4,8,Vs2,Ci3,1.22
+P. lutheri,Prymnesiophyceae,4,8,Vs2,Ci3,nshell3
+P. cruentum,Rhodophyceae,5,9,Vs2,Ci3,nshell3
+C. socialis,Bacillariophyceae,6,10,Vs2,Ci3,nshell3
+A. margalefi,Dinophyceae,35,45,Vs3,Ci1,nshell1
+A. minutum,Dinophyceae,22,28,Vs3,Ci1,nshell1
+A. affine,Dinophyceae,26,34,Vs3,Ci1,nshell1
+A. catenella,Dinophyceae,30,40,Vs3,Ci1,nshell1
+A. tamarense,Dinophyceae,28,35,Vs3,Ci1,nshell1
+Woloszynskia sp.,Dinophyceae,22,28,Vs3,Ci1,nshell1
+G. catenatum1,Dinophyceae,30,40,Vs3,Ci1,nshell1
+G. catenatum2,Dinophyceae,30,40,Vs3,Ci1,nshell1
+G. catenatum3,Dinophyceae,30,40,Vs3,Ci1,nshell1
+Phaeocystis 4-5,Prymnesiophyceae,3,6,Vs1,Ci3,nshell3
+P. micans,Dinophyceae,40,50,Vs3,Ci1,nshell1
+T. oceanica,Bacillariophyceae,9,16,Vs2,Ci3,nshell3
+Tetraselmis sp. ,Prasinophyceae,7,13,Vs2,Ci1,nshell1
+H. niei,Dinophyceae,14,20,Vs2,Ci3,nshell3
+Synechococcus sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+D. brightwelli,Bacillariophyceae,35,45,Vs3,Ci1,nshell1
+N. oculata,Eustigmatophyceae,2,4,Vs1,Ci3,nshell3
+A. flos-aquae,Cyanophyceae,7,13,Vs2,Ci1,nshell1
+Anabaena sp.,Cyanophyceae,7,13,Vs2,Ci1,nshell1
+S. salina,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+Phormidium sp. ,Cyanophyceae,1,3,Vs1,Ci1,nshell1
+N. spumigena,Cyanophyceae,7,13,Vs2,Ci1,nshell1
+Synechococcus sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+Nostoc sp. ,Cyanophyceae,7,13,Vs2,Ci1,nshell1
+Cyanobacterium sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+P. galeata,Cyanophyceae,6,10,Vs2,Ci1,nshell1
