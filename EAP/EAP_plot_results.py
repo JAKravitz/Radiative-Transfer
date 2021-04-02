@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r') as f:
     loaddata = json.load(f)
-    data = json.loads(loaddata)
+    foo = json.loads(loaddata)
 
 tert = data['Chlorophyceae']['D. tertiolecta1']
 theta = data['Chlorophyceae']['G. theta']

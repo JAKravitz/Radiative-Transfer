@@ -29,14 +29,10 @@ optics = {'Bacillariophyceae': {},
           'Rhodophyceae': {}
           }
 
-# phyto species
-phytolist = ['D. tertiolecta1', 'D. tertiolecta2']
-Class = 'Chlorophyceae'
 # paths to imaginary and real refractive index
 mf = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat'
 astarpath = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/in_vivo_phyto_abs.csv'
 batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/EAP_batch_V1.csv', index_col=0)
-batchinfo = batchinfo.iloc[0:2,:]
 
 ## Optical parameters to vary ##
 
@@ -69,82 +65,103 @@ params = {'Vs1': np.arange(0.04,0.26,0.02),
 #%%
 import json
 import timeit as ti
-from joblib import Parallel, delayed
-import multiprocessing
+import pickle
+# from joblib import Parallel, delayed
+# import multiprocessing
 
-class NumpyEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        return json.JSONEncoder.default(self, obj)
+# class NumpyEncoder(json.JSONEncoder):
+#     def default(self, obj):
+#         if isinstance(obj, np.ndarray):
+#             return obj.tolist()
+#         return json.JSONEncoder.default(self, obj)
 
 
-num_cores = multiprocessing.cpu_count()
+# dumped = json.dumps(optics, cls=NumpyEncoder)
+# with open('/Users/jkravz311/Desktop/EAP_optics.json', 'w') as fp:
+#     json.dump(dumped, fp) 
+
+def pandafy (array, Deff):
+    out = pd.DataFrame(array, index=Deff)
+    return out
+
+
+with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
+    pickle.dump(optics, fp) 
+
 
 for i,phyto in enumerate(batchinfo.index):
     
-    if i == 15:
-        print ('$$$$$$$$ 25% DONE $$$$$$$$$')
-    elif i == 30:
-        print ('$$$$$$$$ 50% DONE $$$$$$$$$')
-    elif i == 45:
-        print ('$$$$$$$$ 75% DONE $$$$$$$$$')
-    
-    print ('####### {} #######'.format(phyto))
-    
-    optics[Class][phyto] = {}
-    info = batchinfo.loc[phyto,:]
-    VsF = np.random.choice(params[info.Vs], 3)
-    CiF = np.random.choice(params[info.Ci], 3)
-    nshellF = np.random.choice(params[info.nshell], 3)
-    ncore = np.random.choice(params['ncore'], 1)
-    Deff = np.arange(info.Dmin, info.Dmax, 1)
-    
-    for Vs in VsF:
-        for ci in CiF:
-            for n in nshellF:
-                
-                sname = '{:.2f}_{:.2f}_{:.2f}'.format(Vs, ci/1e6, n)
-                
-                # EAP run
-                # standard
-                tic = ti.default_timer()
-                print ('------ {} ------'.format(sname))
-                Qc, Sigma_c, c, Qb, Sigma_b, b, Qa, Sigma_a, a, Qbb, Sigma_bb, bb, bbtilde = EAP(phyto, mf, astarpath, Vs, ci, Deff, n, ncore)
-                toc = ti.default_timer()
-                runtime = toc - tic
-                print (runtime)
-                
-                # in parallel
-                # tic = ti.default_timer()
-                # print ('------ {} ------'.format(sname))
-                # Qc, Sigma_c, c, Qb, Sigma_b, b, Qa, Sigma_a, a, Qbb, Sigma_bb, bb, bbtilde = Parallel(n_jobs=num_cores)(delayed(EAP(phyto, mf, astarpath, Vs, ci, Deff, n, ncore)))
-                # toc = ti.default_timer()
-                # runtime = toc - tic
-                # print (runtime)                
-                
-                # Store
-                optics[Class][phyto][sname] = {'Qc':Qc,
-                                               'Sigma_c':Sigma_c,
-                                               'c':c,
-                                               'Qb':Qb,
-                                               'Sigma_b':Sigma_b,
-                                               'b':b,
-                                               'Qa':Qa,
-                                               'Sigma_a':Sigma_a,
-                                               'a':a,
-                                               'Qbb':Qbb,
-                                               'Sigma_bb':Sigma_bb,
-                                               'bb':bb,
-                                               'bbtilde':bbtilde}            
+    # with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r+') as fp:
+    #     loaddata = json.load(fp)
+    #     data = json.loads(loaddata)
 
-dumped = json.dumps(optics, cls=NumpyEncoder)
-with open('/Users/jkravz311/Desktop/EAP_optics.json', 'w') as fp:
-    json.dump(dumped, fp)       
+    with open('/Users/jkravz311/Desktop/EAP_optics.p', 'rb') as fp:
+        data = pickle.load(fp)
+        
+        print ('####### i: {} - phyto: {} #######'.format(i,phyto))
+        
+        # get sample info
+        info = batchinfo.loc[phyto,:]
+        clss = info.Class
+        VsF = np.random.choice(params[info.Vs], 3)
+        CiF = np.random.choice(params[info.Ci], 3)
+        nshellF = np.random.choice(params[info.nshell], 3)
+        ncore = np.random.choice(params['ncore'], 1)
+        Deff = np.arange(info.Dmin, info.Dmax, 1)
+        
+        # add new phtyo to dictionary
+        data[clss][phyto] = {}
+        
+        # loop through parameters
+        for Vs in VsF:
+            for ci in CiF:
+                for n in nshellF:
+                    
+                    sname = '{:.2f}_{:.2f}_{:.2f}'.format(Vs, ci/1e6, n)
+                    
+                    # EAP run
+                    # standard
+                    tic = ti.default_timer()
+                    print ('------ {} ------'.format(sname))
+                    Qc, Sigma_c, c, Qb, Sigma_b, b, Qa, Sigma_a, a, Qbb, Sigma_bb, bb, bbtilde = EAP(phyto, mf, astarpath, Vs, ci, Deff, n, ncore)
+                    toc = ti.default_timer()
+                    runtime = toc - tic
+                    print (runtime)
+                    
+                    # empty dict for current run
+                    sname = {'Qc': Qc,
+                             'Sigma_c': Sigma_c,
+                             'c': c,
+                             'Qb': Qb,
+                             'Sigma_b': Sigma_b,
+                             'b': b,
+                             'Qa': Qa,
+                             'Sigma_a': Sigma_a,
+                             'a': a,
+                             'Qbb': Qbb,
+                             'Sigma_bb': Sigma_bb,
+                             'bb': bb,
+                             'bbtilde': bbtilde}  
+                    
+                    # pandafy params so Deff is index
+                    for param in ['Qc','Sigma_c','c','Qb','Sigma_b','b','Qa','Sigma_a','a','Qbb','Sigma_bb','bb','bbtilde']:
+                        sname[param] = pandafy(sname[param], Deff)
+           
+    
+        # dumped = json.dumps(data, cls=NumpyEncoder)
+        # json.dump(dumped,fp)
+        with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
+            pickle.dump(data,fp)
 
 # for loading saved json w/ numpy arrays...
 # with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r') as f:
 #     loaddata = json.load(f)
 #     data = json.loads(loaddata)
+
+#%% test
+
+with open('/Users/jkravz311/Desktop/EAP_optics.p', 'rb') as fp:
+    foo = pickle.load(fp)
+
 
 
