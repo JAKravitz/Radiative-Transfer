@@ -146,8 +146,10 @@ for i,phyto in enumerate(batchinfo.index):
                     # pandafy params so Deff is index
                     for param in ['Qc','Sigma_c','c','Qb','Sigma_b','b','Qa','Sigma_a','a','Qbb','Sigma_bb','bb','bbtilde']:
                         sname[param] = pandafy(sname[param], Deff)
+        
+        # save current run to pickle dict
+        data[clss][phyto][sname] = sname 
            
-    
         # dumped = json.dumps(data, cls=NumpyEncoder)
         # json.dump(dumped,fp)
         with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
