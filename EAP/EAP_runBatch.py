@@ -10,9 +10,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
+import pickle
 from EAP_proc import EAP
 
-#%%
 
 optics = {'Bacillariophyceae': {},
           'Chlorophyceae': {},
@@ -63,12 +63,8 @@ params = {'Vs1': np.arange(0.04,0.26,0.02),
           'ncore': np.arange(1.014, 1.04, 0.005)}
 
 #%%
-import json
-import timeit as ti
-import pickle
-# from joblib import Parallel, delayed
-# import multiprocessing
 
+## if json file...
 # class NumpyEncoder(json.JSONEncoder):
 #     def default(self, obj):
 #         if isinstance(obj, np.ndarray):
@@ -117,43 +113,42 @@ for i,phyto in enumerate(batchinfo.index):
             for ci in CiF:
                 for n in nshellF:
                     
-                    sname = '{:.2f}_{:.2f}_{:.2f}'.format(Vs, ci/1e6, n)
+                    # run name format: 'Vs_Ci_nshell'
+                    rname = '{:.2f}_{:.2f}_{:.2f}'.format(Vs, ci/1e6, n)
+                    data[clss][phyto][rname] = {}
                     
                     # EAP run
                     # standard
-                    tic = ti.default_timer()
-                    print ('------ {} ------'.format(sname))
+                    print ('####### i: {} - phyto: {} #######'.format(i,phyto))
+                    print ('------ {} ------'.format(rname))
                     Qc, Sigma_c, c, Qb, Sigma_b, b, Qa, Sigma_a, a, Qbb, Sigma_bb, bb, bbtilde = EAP(phyto, mf, astarpath, Vs, ci, Deff, n, ncore)
-                    toc = ti.default_timer()
-                    runtime = toc - tic
-                    print (runtime)
                     
                     # empty dict for current run
-                    sname = {'Qc': Qc,
-                             'Sigma_c': Sigma_c,
-                             'c': c,
-                             'Qb': Qb,
-                             'Sigma_b': Sigma_b,
-                             'b': b,
-                             'Qa': Qa,
-                             'Sigma_a': Sigma_a,
-                             'a': a,
-                             'Qbb': Qbb,
-                             'Sigma_bb': Sigma_bb,
-                             'bb': bb,
-                             'bbtilde': bbtilde}  
+                    rname_data = {'Qc': Qc,
+                                  'Sigma_c': Sigma_c,
+                                  'c': c,
+                                  'Qb': Qb,
+                                  'Sigma_b': Sigma_b,
+                                  'b': b,
+                                  'Qa': Qa,
+                                  'Sigma_a': Sigma_a,
+                                  'a': a,
+                                  'Qbb': Qbb,
+                                  'Sigma_bb': Sigma_bb,
+                                  'bb': bb,
+                                  'bbtilde': bbtilde}  
                     
                     # pandafy params so Deff is index
                     for param in ['Qc','Sigma_c','c','Qb','Sigma_b','b','Qa','Sigma_a','a','Qbb','Sigma_bb','bb','bbtilde']:
-                        sname[param] = pandafy(sname[param], Deff)
+                        rname_data[param] = pandafy(rname_data[param], Deff)
         
-        # save current run to pickle dict
-        data[clss][phyto][sname] = sname 
+                    # save current run to pickle dict
+                    data[clss][phyto][rname] = rname_data 
            
-        # dumped = json.dumps(data, cls=NumpyEncoder)
-        # json.dump(dumped,fp)
-        with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
-            pickle.dump(data,fp)
+    # dumped = json.dumps(data, cls=NumpyEncoder)
+    # json.dump(dumped,fp)
+    with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
+        pickle.dump(data,fp)
 
 # for loading saved json w/ numpy arrays...
 # with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r') as f:
