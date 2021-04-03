@@ -1,7 +1,7 @@
 ﻿Species,Class,Dmin,Dmax,Vs,Ci,nshell
 D. tertiolecta1,Chlorophyceae,6,14,Vs2,Ci3,nshell3
 G. theta,Cryptophyceae,4,12,Vs2,Ci2,nshell2
-T. oceanica,Coscinodiscophyceae,4,12,Vs2,Ci2,nshell2
+T. oceanica1,Bacillariophyceae,4,12,Vs2,Ci2,nshell2
 G. simplex,Dinophyceae,4,12,Vs2,Ci2,nshell2
 H. akashiwo,Raphidophyceae,20,30,Vs3,Ci1,nshell1
 N. atomus,Chlorophyceae,2,5,Vs1,Ci2,nshell2
@@ -43,7 +43,7 @@ G. catenatum2,Dinophyceae,30,40,Vs3,Ci1,nshell1
 G. catenatum3,Dinophyceae,30,40,Vs3,Ci1,nshell1
 Phaeocystis 4-5,Prymnesiophyceae,3,6,Vs1,Ci3,nshell3
 P. micans,Dinophyceae,40,50,Vs3,Ci1,nshell1
-T. oceanica,Bacillariophyceae,9,16,Vs2,Ci3,nshell3
+T. oceanica2,Bacillariophyceae,9,16,Vs2,Ci3,nshell3
 Tetraselmis sp. ,Prasinophyceae,7,13,Vs2,Ci1,nshell1
 H. niei,Dinophyceae,14,20,Vs2,Ci3,nshell3
 Synechococcus sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
