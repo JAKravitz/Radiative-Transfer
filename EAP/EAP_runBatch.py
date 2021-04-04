@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 import pickle
-from EAP_proc import EAP
+from EAP.EAP_proc import EAP
 
 
 optics = {'Bacillariophyceae': {},
@@ -30,6 +30,7 @@ optics = {'Bacillariophyceae': {},
           }
 
 # paths to imaginary and real refractive index
+start = 0 # 0 to start from beginning, else phyto
 mf = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat'
 astarpath = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/in_vivo_phyto_abs.csv'
 batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/EAP_batch_V1.csv', index_col=0)
@@ -57,9 +58,9 @@ params = {'Vs1': np.arange(0.04,0.26,0.02),
           'Ci1': np.arange(.5e6,7e6,.5e6),
           'Ci2': np.arange(4e6,12e6,.5e6),
           'Ci3': np.arange(2e6,8e6,.5e6),
-          'nshell1': np.arange(1.06,1.16,.01).astype('float16'),
-          'nshell2': np.arange(1.11, 1.22,.01).astype('float16'),
-          'nshell3': np.arange(1.1, 1.19,.01).astype('float16'),
+          'nshell1': np.arange(1.06,1.16,.01),
+          'nshell2': np.arange(1.11, 1.22,.01),
+          'nshell3': np.arange(1.1, 1.19,.01),
           'ncore': np.arange(1.014, 1.04, 0.005)}
 
 #%%
@@ -80,11 +81,14 @@ def pandafy (array, Deff):
     out = pd.DataFrame(array, index=Deff)
     return out
 
+# define where to start in batch list
+if start == 0:
+    with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
+        pickle.dump(optics, fp) 
+else:
+    batchinfo = batchinfo.loc[start:,:]
 
-with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
-    pickle.dump(optics, fp) 
-
-
+# loop through phyto batch list
 for i,phyto in enumerate(batchinfo.index):
     
     # with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r+') as fp:
@@ -99,9 +103,9 @@ for i,phyto in enumerate(batchinfo.index):
         # get sample info
         info = batchinfo.loc[phyto,:]
         clss = info.Class
-        VsF = np.random.choice(params[info.Vs], 3)
-        CiF = np.random.choice(params[info.Ci], 3)
-        nshellF = np.random.choice(params[info.nshell], 3)
+        VsF = np.random.choice(params[info.Vs], 3, replace=False)
+        CiF = np.random.choice(params[info.Ci], 3, replace=False)
+        nshellF = np.random.choice(params[info.nshell], 3, replace=False)
         ncore = np.random.choice(params['ncore'], 1)
         Deff = np.arange(info.Dmin, info.Dmax, 1)
         
