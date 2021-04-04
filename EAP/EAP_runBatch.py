@@ -156,6 +156,7 @@ for i,phyto in enumerate(batchinfo.index):
 #     data = json.loads(loaddata)
 
 #%% test
+import pickle
 
 with open('/Users/jkravz311/Desktop/EAP_optics.p', 'rb') as fp:
     foo = pickle.load(fp)
