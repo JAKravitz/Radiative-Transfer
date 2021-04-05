@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 import pickle
-from EAP.EAP_proc import EAP
+from EAP_proc import EAP
 
 
 optics = {'Bacillariophyceae': {},
@@ -30,7 +30,7 @@ optics = {'Bacillariophyceae': {},
           }
 
 # paths to imaginary and real refractive index
-start = 0 # 0 to start from beginning, else phyto
+start = 'P. calceolata' # 0 to start from beginning, else phyto
 mf = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat'
 astarpath = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/in_vivo_phyto_abs.csv'
 batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/EAP_batch_V1.csv', index_col=0)
