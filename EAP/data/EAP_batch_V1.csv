@@ -11,7 +11,7 @@ S. elongatus,Cyanophyceae,2,4,Vs1,Ci1,nshell1
 F. pinnata,Fragilariophyceae,3,9,Vs2,Ci2,nshell2
 P. calceolata,Pelagiophyceae,1,3,Vs1,Ci1,nshell1
 H. virescens,Cryptophyceae,2,5,Vs2,Ci3,nshell3
-A. tamarense,Dinophyceae,27,35,Vs3,Ci1,nshell1
+A. tamarense1,Dinophyceae,27,35,Vs3,Ci1,nshell1
 A. carterae,Dinophyceae,6,14,Vs2,Ci3,nshell3
 P. capsulatus,Prasinophyceae,2,4,Vs1,Ci1,nshell1
 T. weissflogii,Coscinodiscophyceae,16,24,Vs3,Ci3,nshell3
@@ -36,17 +36,14 @@ A. margalefi,Dinophyceae,35,45,Vs3,Ci1,nshell1
 A. minutum,Dinophyceae,22,28,Vs3,Ci1,nshell1
 A. affine,Dinophyceae,26,34,Vs3,Ci1,nshell1
 A. catenella,Dinophyceae,30,40,Vs3,Ci1,nshell1
-A. tamarense,Dinophyceae,28,35,Vs3,Ci1,nshell1
+A. tamarense2,Dinophyceae,28,35,Vs3,Ci1,nshell1
 Woloszynskia sp.,Dinophyceae,22,28,Vs3,Ci1,nshell1
-G. catenatum1,Dinophyceae,30,40,Vs3,Ci1,nshell1
-G. catenatum2,Dinophyceae,30,40,Vs3,Ci1,nshell1
-G. catenatum3,Dinophyceae,30,40,Vs3,Ci1,nshell1
 Phaeocystis 4-5,Prymnesiophyceae,3,6,Vs1,Ci3,nshell3
 P. micans,Dinophyceae,40,50,Vs3,Ci1,nshell1
 T. oceanica2,Bacillariophyceae,9,16,Vs2,Ci3,nshell3
 Tetraselmis sp. ,Prasinophyceae,7,13,Vs2,Ci1,nshell1
 H. niei,Dinophyceae,14,20,Vs2,Ci3,nshell3
-Synechococcus sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+Synechococcus sp1 ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
 D. brightwelli,Bacillariophyceae,35,45,Vs3,Ci1,nshell1
 N. oculata,Eustigmatophyceae,2,4,Vs1,Ci3,nshell3
 A. flos-aquae,Cyanophyceae,7,13,Vs2,Ci1,nshell1
@@ -54,7 +51,7 @@ Anabaena sp.,Cyanophyceae,7,13,Vs2,Ci1,nshell1
 S. salina,Cyanophyceae,1,2,Vs1,Ci1,nshell1
 Phormidium sp. ,Cyanophyceae,1,3,Vs1,Ci1,nshell1
 N. spumigena,Cyanophyceae,7,13,Vs2,Ci1,nshell1
-Synechococcus sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
+Synechococcus sp2,Cyanophyceae,1,2,Vs1,Ci1,nshell1
 Nostoc sp. ,Cyanophyceae,7,13,Vs2,Ci1,nshell1
 Cyanobacterium sp. ,Cyanophyceae,1,2,Vs1,Ci1,nshell1
 P. galeata,Cyanophyceae,6,10,Vs2,Ci1,nshell1

@@ -30,7 +30,7 @@ optics = {'Bacillariophyceae': {},
           }
 
 # paths to imaginary and real refractive index
-start = 'P. calceolata' # 0 to start from beginning, else phyto
+start = 'A. tamarense1' # 0 to start from beginning, else phyto
 mf = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat'
 astarpath = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/in_vivo_phyto_abs.csv'
 batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/EAP_batch_V1.csv', index_col=0)
