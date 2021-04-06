@@ -9,7 +9,7 @@ Pavlova sp. ,Prymnesiophyceae,2,5,Vs1,Ci2,nshell2
 C. polylepis,Prymnesiophyceae,4,12,Vs1,Ci3,nshell3
 S. elongatus,Cyanophyceae,2,4,Vs1,Ci1,nshell1
 F. pinnata,Fragilariophyceae,3,9,Vs2,Ci2,nshell2
-P. calceolata,Pelagiophyceae,1,3,Vs1,Ci1,nshell1
+P. calceolata,Pelagophyceae,1,3,Vs1,Ci1,nshell1
 H. virescens,Cryptophyceae,2,5,Vs2,Ci3,nshell3
 A. tamarense1,Dinophyceae,27,35,Vs3,Ci1,nshell1
 A. carterae,Dinophyceae,6,14,Vs2,Ci3,nshell3
@@ -28,7 +28,7 @@ T. rotula,Coscinodiscophyceae,16,24,Vs3,Ci1,nshell1
 C. calcitrans,Coscinodiscophyceae,4,8,Vs2,Ci2,nshell3
 K. rotundum,Dinophyceae,6,13,Vs2,Ci3,nshell3
 D. tertiolecta2,Chlorophyceae,6,14,Vs2,Ci3,nshell3
-E. huxleyi,Prymnesiophyceae,4,8,Vs2,Ci3,1.22
+E. huxleyi,Prymnesiophyceae,4,8,Vs2,Ci3,nshell4
 P. lutheri,Prymnesiophyceae,4,8,Vs2,Ci3,nshell3
 P. cruentum,Rhodophyceae,5,9,Vs2,Ci3,nshell3
 C. socialis,Bacillariophyceae,6,10,Vs2,Ci3,nshell3

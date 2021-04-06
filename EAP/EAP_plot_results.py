@@ -7,34 +7,51 @@ Plot EAP optics data
 """
 import numpy as np
 import pandas as pd
-import json
+import pickle
 import matplotlib.pyplot as plt
 
-with open('/Users/jkravz311/Desktop/EAP_optics.json', 'r') as f:
-    loaddata = json.load(f)
-    foo = json.loads(loaddata)
-
-tert = data['Chlorophyceae']['D. tertiolecta1']
-theta = data['Chlorophyceae']['G. theta']
-data['Cryptophyceae']['G. theta'] = theta
-data['Chlorophyceae'] = {'D. tertiolecta1':tert} 
-
-
-#%%
+with open('/Users/jkravz311/Desktop/EAP_optics.p', 'rb') as fp:
+    data = pickle.load(fp)
 
 # lambda
 l = np.arange(400,905,5)
 
-# absorption
+#%%
+
 fig, axs = plt.subplots(4,4,figsize=(20,20))
 axs = axs.ravel()
 count = 0
 for c in data:
     for phyto in data[c]:
         for sname in data[c][phyto]:
-            s = data[c][phyto][sname]['bbtilde'] 
-            for deff in s:
-                axs[count].plot(l,deff)
+            s = data[c][phyto][sname]['bb'] 
+            for deff in s.index:
+                axs[count].plot(l,s.loc[deff,:])
+    axs[count].set_title(c)
     count = count + 1
             
-        
+#%%
+import statsmodels.api as sm
+
+
+colors = [(0, 1, 0), (0, .7, 0), (0, .3, 0)]
+cmap_name = 'my_list'
+n_bin=3
+
+
+fig, axs = plt.subplots(4,4,figsize=(20,20))
+axs = axs.ravel()
+count = 0
+for c in data:
+    for phyto in data[c]:
+        for sname in data[c][phyto]:
+            s = data[c][phyto][sname]['bb'] 
+            for deff in s.index:
+                axs[count].plot(l,s.loc[deff,:])
+    axs[count].set_title(c)
+    count = count + 1
+
+#%%
+cyano = data['Cyanophyceae']['S. elongatus']['0.12_6.50_1.09']['a']
+
+

@@ -30,7 +30,7 @@ optics = {'Bacillariophyceae': {},
           }
 
 # paths to imaginary and real refractive index
-start = 'A. tamarense1' # 0 to start from beginning, else phyto
+start = 'E. huxleyi' # 0 to start from beginning, else phyto
 mf = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/501nm_extended_e1701000.mat'
 astarpath = '/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/in_vivo_phyto_abs.csv'
 batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/data/EAP_batch_V1.csv', index_col=0)
@@ -61,6 +61,7 @@ params = {'Vs1': np.arange(0.04,0.26,0.02),
           'nshell1': np.arange(1.06,1.16,.01),
           'nshell2': np.arange(1.11, 1.22,.01),
           'nshell3': np.arange(1.1, 1.19,.01),
+          'nshell4':1.22,
           'ncore': np.arange(1.014, 1.04, 0.005)}
 
 #%%
@@ -105,7 +106,10 @@ for i,phyto in enumerate(batchinfo.index):
         clss = info.Class
         VsF = np.random.choice(params[info.Vs], 3, replace=False)
         CiF = np.random.choice(params[info.Ci], 3, replace=False)
-        nshellF = np.random.choice(params[info.nshell], 3, replace=False)
+        if info.nshell != 'nshell4':
+            nshellF = params[info.nshell]
+        else:
+            nshellF = np.random.choice(params[info.nshell], 3, replace=False)
         ncore = np.random.choice(params['ncore'], 1)
         Deff = np.arange(info.Dmin, info.Dmax, 1)
         
@@ -166,4 +170,6 @@ with open('/Users/jkravz311/Desktop/EAP_optics.p', 'rb') as fp:
     foo = pickle.load(fp)
 
 
-
+# foo['Pelagophyceae'] = foo.pop('Pelagiophyceae')
+# with open('/Users/jkravz311/Desktop/EAP_optics.p', 'wb') as fp:
+#     pickle.dump(foo,fp)
