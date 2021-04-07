@@ -100,6 +100,7 @@ nonveg.to_csv('/Users/jkravz311/Desktop/non_photo_veg_adjacency.csv',index=False
 shrub.to_csv('/Users/jkravz311/Desktop/shrub_adjacency.csv',index=False)
 tree.to_csv('/Users/jkravz311/Desktop/tree_adjacency.csv',index=False)
 grass.to_csv('/Users/jkravz311/Desktop/grass_adjacency.csv',index=False)
+soil.to_csv('/Users/jkravz311/Desktop/soil_adjacency.csv',index=False)
 
 #%%
 # clusters = soil.groupby('Class')

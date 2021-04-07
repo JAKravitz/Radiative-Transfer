@@ -1,0 +1,12 @@
+[workspace]
+restore_data_on_startup = True
+save_data_on_exit = True
+save_history = True
+save_non_project_files = False
+project_type = empty-project-type
+recent_files = ['EAP/EAP_runBatch.py', 'EAP/EAP_proc.py', '../../../../var/folders/ql/8flbdl1x7gb3fq7s39xv46c40000gn/T/kite_tutorial.py']
+
+[main]
+version = 0.2.0
+recent_files = ['EAP/EAP_runBatch.py', 'EAP/EAP_plot_results.py']
+

@@ -52,16 +52,16 @@ batchinfo = pd.read_csv('/Users/jkravz311/git_projects/Radiative-Transfer/EAP/da
 # nshell = real refractive index of outer core (shell)
 # ranges 1.06-1.22
 
-params = {'Vs1': np.arange(0.04,0.26,0.02),
-          'Vs2': np.arange(0.2,0.4,0.02),
-          'Vs3': np.arange(0.36,0.56,0.02),
-          'Ci1': np.arange(.5e6,7e6,.5e6),
-          'Ci2': np.arange(4e6,12e6,.5e6),
-          'Ci3': np.arange(2e6,8e6,.5e6),
-          'nshell1': np.arange(1.06,1.16,.01),
-          'nshell2': np.arange(1.11, 1.22,.01),
-          'nshell3': np.arange(1.1, 1.19,.01),
-          'nshell4':1.22,
+params = {'Vs1': np.arange(0.04,0.26,0.02), # small
+          'Vs2': np.arange(0.2,0.4,0.02), # medium
+          'Vs3': np.arange(0.36,0.56,0.02), # large
+          'Ci1': np.arange(.5e6,7e6,.5e6), # low
+          'Ci2': np.arange(4e6,12e6,.5e6), # high
+          'Ci3': np.arange(2e6,8e6,.5e6), # avg
+          'nshell1': np.arange(1.06,1.16,.01), # low 
+          'nshell2': np.arange(1.11, 1.22,.01), # high
+          'nshell3': np.arange(1.1, 1.19,.01), # avg
+          'nshell4': np.array([1.21, 1.22, 1.23]), # very high (huxleyi)
           'ncore': np.arange(1.014, 1.04, 0.005)}
 
 #%%
@@ -106,10 +106,7 @@ for i,phyto in enumerate(batchinfo.index):
         clss = info.Class
         VsF = np.random.choice(params[info.Vs], 3, replace=False)
         CiF = np.random.choice(params[info.Ci], 3, replace=False)
-        if info.nshell != 'nshell4':
-            nshellF = params[info.nshell]
-        else:
-            nshellF = np.random.choice(params[info.nshell], 3, replace=False)
+        nshellF = np.random.choice(params[info.nshell], 3, replace=False)
         ncore = np.random.choice(params['ncore'], 1)
         Deff = np.arange(info.Dmin, info.Dmax, 1)
         
