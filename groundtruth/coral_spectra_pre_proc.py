@@ -18,23 +18,24 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 from scipy.interpolate import BSpline, LSQUnivariateSpline
 
-# setup
-path = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/corals/raw/Roelfsema_phinn/Heron_Reef_benthic_substrate_cover_2012.tab'
-outpath = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/corals/final/Roelfsema_2016_Moreton_Bay.csv'
-header = 82
+# setup for all formats
+path = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/corals/raw/Roelfsema_phinn/cook_islands_compiled_raw.csv'
+outpath = '/Users/jkravz311/Desktop/nasa_npp/groundtruth_data/corals/final/Roelfsema_2017_cook.csv'
+# define knot positions
+# minus first and last (400,800/900)
+l = np.arange(400,801,1)
+kp = [410,420,425,430,440,460,480,500,515,530,545,560,575,590,600,610,
+      620,630,640,650,665,680,695,710,725,740,760,780]
+
+# extra setup if tab delimited
+# header = 82
 # cite = 'Roelfsema & Phinn, 2013'
 # loc = 'Heron reef, Australia'
 # metaid = np.array(['Name','Comment','Location','Citation'])
 # group1 = 'Event'
 # group2 = 'Comment'
-l = np.arange(400,901,1)
-# define knot positions
-# minus first and last (400,800/900)
-kp = [410,420,425,430,440,460,480,500,515,530,545,560,575,590,600,610,
-      620,630,640,650,665,680,695,710,725,740,760,780,800,850]
-
 # quick check of data
-data = pd.read_csv(path,sep='\t',header=header)
+# data = pd.read_csv(path,sep='\t',header=header)
 
 #%% CELL 2: PROC FOR TAB DELIMITED DATA
 
@@ -130,10 +131,13 @@ for k in data.index:
 out = dataout.T
 cols = np.concatenate([meta.index,l])
 out.columns = cols    
+out.to_csv(outpath)
 
 # quick plot for check
 spectra = out.iloc[:,4:]
 spectra = spectra.astype(float)
-spectra.T.plot(legend=False)
+fig, ax = plt.subplots()
+spectra.T.plot(ax=ax,legend=False)
+ax.set_ylim(0,4)
 
         
