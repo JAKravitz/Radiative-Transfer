@@ -76,19 +76,20 @@ import matplotlib.pyplot as plt
 
 soil1 = soil.sample().filter(regex='\d').values * .5
 tree1 = tree.sample().filter(regex='\d').values * .3
-road1 = road.sample().filter(regex='\d').values * .2
-mix = np.nansum(np.stack((soil1[0],tree1[0],road1[0])), axis=0)
+shrub1 = shrub.sample().filter(regex='\d').values * .2
+mix = np.nansum(np.stack((soil1[0],tree1[0],shrub1[0])), axis=0)
 #mix = soil1[0]+tree1[0]+road1[0]
 
 wl = np.arange(400,900,1)
 
 fig,ax=plt.subplots()
-ax.plot(wl,soil1[0]*2,label='orig soil')
+# ax.plot(wl,soil1[0]*2,label='orig soil')
 ax.plot(wl,soil1[0],label='soil')
 ax.plot(wl,tree1[0],label='tree')
-ax.plot(wl,road1[0],label='road')
+ax.plot(wl,shrub1[0],label='shrub')
 ax.plot(wl,mix,label='mix')
 ax.legend()
+fig.savefig('/Users/jkravz311/Desktop/adjacency.png',bbox_inches='tight',dpi=300)
 
 #%% Save
 snow.to_csv('/Users/jkravz311/Desktop/snow_adjacency.csv',index=False)
